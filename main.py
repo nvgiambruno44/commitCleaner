@@ -10,14 +10,13 @@ def init(org, repo, head, base):
     for commit in commits:
         if commit.sha == base:
             recording = True
-        if commit.sha == head:
-            recording = False
         if recording:
             changelog = changelog + "\n" + commit.last_modified + ": " + commit.commit.message
+        if commit.sha == head:
+            recording = False
 
     print(changelog)
 
 
 if __name__ == '__main__':
-    init('octocat', 'Hello-World', '7fd1a60b01f91b314f59955a4e4d4e80d8edf11d',
-         '762941318ee16e59dabbacb1b4049eec22f0d303')
+    init('nvgiambruno44', 'commitCleaner', '65aa95a5ae0ecea6e1b79fb230ff171ef31d7158', '16b6e9ac270b341cbde0cbf2096536ca7ffb6411')
