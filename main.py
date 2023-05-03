@@ -11,7 +11,7 @@ def init(org, repo, head, base):
         if commit.sha == base:
             recording = True
         if commit.sha == head:
-            record = False
+            recording = False
         if recording:
             changelog = changelog + "\n" + commit.last_modified + ": " + commit.commit.message
 
