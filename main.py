@@ -1,17 +1,28 @@
 from github import Github
+import argparse
 
 
-# TODO: token auth, error handling, params
-def generateChangeLog(org, repo, head, base):
+# TODO: token auth, error handling
+def generateChangeLog():
+    # Handle Args
+    parser = argparse.ArgumentParser(description='Changelog comparison util')
+    parser.add_argument('-o', '--org', help='The github org', required=True)
+    parser.add_argument('-r', '--repo', help='the github repo', required=True)
+    parser.add_argument('-n', '--new', help='the most recent', required=True)
+    parser.add_argument('-b', '--base', help='the base commit', required=True)
+    parser.add_argument('-t', '--token', help='the optional gitlab token', required=False)
+    args = vars(parser.parse_args())
+
     recording = False
     changelog = ''
+
     try:
-        for commit in Github().get_repo(f"{org}/{repo}").get_commits():
-            if commit.sha == head:
+        for commit in Github().get_repo(f"{args['org']}/{args['repo']}").get_commits():
+            if commit.sha == args['new']:
                 recording = True
             if recording:
                 changelog = changelog + "\n" + commit.last_modified + ": " + commit.commit.message
-            if commit.sha == base:
+            if commit.sha == args['base']:
                 break
 
         print(changelog)
@@ -19,5 +30,4 @@ def generateChangeLog(org, repo, head, base):
 
 
 if __name__ == '__main__':
-    generateChangeLog('nvgiambruno44', 'commitCleaner', 'faccbe47cf473d6110474a4e9f00adde32cfe5c7',
-                      'a5b143051de1f11dcb008f70e03d79a338d1dd99')
+    generateChangeLog()
