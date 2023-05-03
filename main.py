@@ -8,15 +8,15 @@ def init(org, repo, head, base):
     recording = False
     changelog = ''
     for commit in commits:
-        if commit.sha == base:
+        if commit.sha == head:
             recording = True
         if recording:
             changelog = changelog + "\n" + commit.last_modified + ": " + commit.commit.message
-        if commit.sha == head:
+        if commit.sha == base:
             recording = False
 
     print(changelog)
 
-
 if __name__ == '__main__':
-    init('nvgiambruno44', 'commitCleaner', '65aa95a5ae0ecea6e1b79fb230ff171ef31d7158', '16b6e9ac270b341cbde0cbf2096536ca7ffb6411')
+    init('nvgiambruno44', 'commitCleaner', 'faccbe47cf473d6110474a4e9f00adde32cfe5c7',
+         'a5b143051de1f11dcb008f70e03d79a338d1dd99')
