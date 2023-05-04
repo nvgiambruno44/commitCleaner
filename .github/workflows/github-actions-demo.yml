@@ -14,5 +14,5 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: Test The Project
         run: |
-          commitCleaner/main.py -o nvgiambruno44 -r commitCleaner -n faccbe47cf473d6110474a4e9f00adde32cfe5c7 -b a5b143051de1f11dcb008f70e03d79a338d1dd99
+          python3 main.py -o nvgiambruno44 -r commitCleaner -n faccbe47cf473d6110474a4e9f00adde32cfe5c7 -b a5b143051de1f11dcb008f70e03d79a338d1dd99
       - run: echo "🍏 This job's status is ${{ job.status }}."
