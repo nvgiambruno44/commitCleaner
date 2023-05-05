@@ -2,7 +2,7 @@ from github import Github
 import argparse
 
 
-# TODO: token auth, error handling
+# TODO: error handling
 def generateChangeLog():
     # Handle Args
     parser = argparse.ArgumentParser(description='Changelog comparison util')
@@ -17,7 +17,7 @@ def generateChangeLog():
     changelog = ''
 
     try:
-        for commit in Github().get_repo(f"{args['org']}/{args['repo']}").get_commits():
+        for commit in Github(args['token']).get_repo(f"{args['org']}/{args['repo']}").get_commits():
             if commit.sha == args['new']:
                 recording = True
             if recording:
@@ -26,7 +26,8 @@ def generateChangeLog():
                 break
 
         print(changelog)
-    except Exception as e: print(e)
+    except Exception as e:
+        print(e)
 
 
 if __name__ == '__main__':
